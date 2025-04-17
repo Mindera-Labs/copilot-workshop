@@ -58,10 +58,6 @@ GitHub Copilot in VS Code provides several ways to reference code and context in
    Explain this error: #terminalOutput
    ```
 
-5. **#vscodeAPI**: Add VS Code API as context to your prompt for extension development
-   ```
-   How do I implement a custom editor using #vscodeAPI?
-   ```
 
 ### Web Search and Documentation Commands
 
