@@ -21,17 +21,9 @@ This application could be enhanced with Model Context Protocol (MCP) servers to 
 1. **GitHub MCP Server**
    - Repository management and file operations
    - Pull request and issue handling
-   - Code scanning and analysis
+   - Issues creation and more
 
-2. **PostgreSQL MCP Server**
-   - Direct database access for AI assistants
-   - Schema inspection and query building
-   - Performance analytics
 
-3. **Testing & CI/CD Integration**
-   - Automated test execution and reporting
-   - Deployment monitoring and management
-   - Performance tracking
 
 ### Additional MCP Resources
 
