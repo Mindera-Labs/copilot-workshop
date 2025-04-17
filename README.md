@@ -40,30 +40,35 @@ Find more MCP servers and resources at:
 - [MCPServers.net](https://mcpservers.net/) - Comprehensive MCP server navigation platform
 - [GitHub MCP Servers Repository](https://github.com/EvalsOne/mcp-servers) - Collection of reference implementations
 
-## GitHub Copilot VSCODE Commands with Hash (#)
+## GitHub Copilot Commands in VS Code
 
-GitHub Copilot's hash (#) commands allow you to reference code elements, search the web for documentation, and more.
+GitHub Copilot in VS Code provides several ways to reference code and context in your prompts using hash (#) commands.
 
 ### Code Reference Commands
 
-1. **#file**: Reference specific files
+1. **#file**: Reference specific files in your workspace
    ```
    Explain the validation in #file:src/main/java/io/avios/entity/Todo.java
    ```
 
-2. **#selection**: Reference selected code
+2. **#selection**: Reference your currently selected code
    ```
    Generate a test for this method: #selection
    ```
 
-3. **#codebase**: Reference your entire codebase
-   ```
-   Find usages of TodoDTO in the #codebase
-   ```
-
-4. **#editor**: Reference code in the active editor
+3. **#editor**: Reference code in the active editor
    ```
    Refactor this: #editor
+   ```
+
+4. **#terminalOutput**: Reference output from the terminal
+   ```
+   Explain this error: #terminalOutput
+   ```
+
+5. **#vscodeAPI**: Add VS Code API as context to your prompt for extension development
+   ```
+   How do I implement a custom editor using #vscodeAPI?
    ```
 
 ### Web Search and Documentation Commands
@@ -73,29 +78,36 @@ GitHub Copilot's hash (#) commands allow you to reference code elements, search 
    #websearch Quarkus best practices for validation
    ```
 
-2. **#fetch**: Fetch and analyze content from specific URLs
+2. **#fetch**: Fetch and analyze content from a specific URL
    ```
    #fetch https://quarkus.io/guides/validation
    ```
 
-### TDD Workflow with Hash Commands
+### TDD Workflow with GitHub Copilot
 
 1. **Writing Tests First**:
    ```
-   Write a test for a feature to find todos by priority in #file:src/test/java/io/avios/service/TodoServiceTest.java
+   /tests
    ```
+   This slash command generates tests for methods in your editor
 
-2. **Implementing Features**:
+2. **Setting Up Test Framework**:
+   ```
+   /setupTests
+   ```
+   This slash command helps configure a testing framework for your project
+
+3. **Implementing Features**:
    ```
    Implement the TodoService method to pass this test: #selection
    ```
 
-3. **Researching Implementation Methods**:
+4. **Researching Implementation Methods**:
    ```
    #websearch efficient SQL query for filtering todos by multiple criteria in Quarkus
    ```
 
-4. **Checking Documentation**:
+5. **Checking Documentation**:
    ```
    #fetch https://quarkus.io/guides/hibernate-orm-panache
    ```
@@ -115,9 +127,7 @@ To implement a "search todos by keyword" feature:
    ```
 
 3. **Create Test**: 
-   ```
-   Create a test for searching todos by keyword in #file:src/test/java/io/avios/service/TodoServiceTest.java
-   ```
+   Use the `/tests` command to generate tests for your search feature
 
 4. **Implement Feature**:
    ```
