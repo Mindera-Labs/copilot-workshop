@@ -12,7 +12,35 @@ This application demonstrates a well-structured Quarkus application with:
 - Integration with PostgreSQL database
 - Comprehensive test coverage
 
-## GitHub Copilot Commands with Hash (#)
+## Model Context Protocol (MCP) Integration Possibilities
+
+This application could be enhanced with Model Context Protocol (MCP) servers to extend its capabilities and enable AI assistants to interact with various services directly.
+
+### MCP Servers for Integration
+
+1. **GitHub MCP Server**
+   - Repository management and file operations
+   - Pull request and issue handling
+   - Code scanning and analysis
+
+2. **PostgreSQL MCP Server**
+   - Direct database access for AI assistants
+   - Schema inspection and query building
+   - Performance analytics
+
+3. **Testing & CI/CD Integration**
+   - Automated test execution and reporting
+   - Deployment monitoring and management
+   - Performance tracking
+
+### Additional MCP Resources
+
+Find more MCP servers and resources at:
+- [MCP.so](https://mcp.so/) - The official directory of MCP servers
+- [MCPServers.net](https://mcpservers.net/) - Comprehensive MCP server navigation platform
+- [GitHub MCP Servers Repository](https://github.com/EvalsOne/mcp-servers) - Collection of reference implementations
+
+## GitHub Copilot VSCODE Commands with Hash (#)
 
 GitHub Copilot's hash (#) commands allow you to reference code elements, search the web for documentation, and more.
 
