@@ -1,5 +1,6 @@
 package io.avios;
 
+import io.avios.dto.TodoDTO;
 import io.quarkus.test.common.QuarkusTestResource;
 import io.quarkus.test.junit.QuarkusTest;
 import io.restassured.http.ContentType;
@@ -25,14 +26,14 @@ public class TodoResourceIT {
     @Test
     public void testCreateAndGetTodo() {
         // Create a new todo
-        Todo todo = new Todo();
-        todo.title = "Test Todo";
-        todo.description = "Test Description";
-        todo.completed = false;
+        TodoDTO todoDTO = new TodoDTO();
+        todoDTO.title = "Test Todo";
+        todoDTO.description = "Test Description";
+        todoDTO.completed = false;
 
         Long todoId = given()
             .contentType(ContentType.JSON)
-            .body(todo)
+            .body(todoDTO)
             .when().post("/api/todos")
             .then()
                 .statusCode(201)
@@ -51,27 +52,29 @@ public class TodoResourceIT {
     @Test
     public void testUpdateTodo() {
         // Create a todo first
-        Todo todo = new Todo();
-        todo.title = "Original Title";
-        todo.description = "Original Description";
-        todo.completed = false;
+        TodoDTO todoDTO = new TodoDTO();
+        todoDTO.title = "Original Title";
+        todoDTO.description = "Original Description";
+        todoDTO.completed = false;
 
         Long todoId = given()
             .contentType(ContentType.JSON)
-            .body(todo)
+            .body(todoDTO)
             .when().post("/api/todos")
             .then()
                 .statusCode(201)
                 .extract().jsonPath().getLong("id");
 
         // Update the todo
-        todo.title = "Updated Title";
-        todo.description = "Updated Description";
-        todo.completed = true;
+        TodoDTO updatedTodoDTO = new TodoDTO();
+        updatedTodoDTO.id = todoId; // Include ID for update
+        updatedTodoDTO.title = "Updated Title";
+        updatedTodoDTO.description = "Updated Description";
+        updatedTodoDTO.completed = true;
 
         given()
             .contentType(ContentType.JSON)
-            .body(todo)
+            .body(updatedTodoDTO)
             .when().put("/api/todos/" + todoId)
             .then()
                 .statusCode(200)
@@ -83,14 +86,14 @@ public class TodoResourceIT {
     @Test
     public void testDeleteTodo() {
         // Create a todo first
-        Todo todo = new Todo();
-        todo.title = "Delete Me";
-        todo.description = "To be deleted";
-        todo.completed = false;
+        TodoDTO todoDTO = new TodoDTO();
+        todoDTO.title = "Delete Me";
+        todoDTO.description = "To be deleted";
+        todoDTO.completed = false;
 
         Long todoId = given()
             .contentType(ContentType.JSON)
-            .body(todo)
+            .body(todoDTO)
             .when().post("/api/todos")
             .then()
                 .statusCode(201)
@@ -112,14 +115,14 @@ public class TodoResourceIT {
     @Test
     public void testMarkTodoAsCompleted() {
         // Create a todo first
-        Todo todo = new Todo();
-        todo.title = "Complete Me";
-        todo.description = "To be completed";
-        todo.completed = false;
+        TodoDTO todoDTO = new TodoDTO();
+        todoDTO.title = "Complete Me";
+        todoDTO.description = "To be completed";
+        todoDTO.completed = false;
 
         Long todoId = given()
             .contentType(ContentType.JSON)
-            .body(todo)
+            .body(todoDTO)
             .when().post("/api/todos")
             .then()
                 .statusCode(201)
@@ -131,5 +134,20 @@ public class TodoResourceIT {
             .then()
                 .statusCode(200)
                 .body("completed", equalTo(true));
+    }
+    
+    @Test
+    public void testCreateTodoWithInvalidData() {
+        // Test with empty title (which should be rejected by validation)
+        TodoDTO invalidTodoDTO = new TodoDTO();
+        invalidTodoDTO.title = ""; // Empty title should be rejected
+        invalidTodoDTO.description = "Test Description";
+        
+        given()
+            .contentType(ContentType.JSON)
+            .body(invalidTodoDTO)
+            .when().post("/api/todos")
+            .then()
+                .statusCode(400); // Bad request due to validation failure
     }
 }
